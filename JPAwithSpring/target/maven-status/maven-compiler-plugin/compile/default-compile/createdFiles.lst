@@ -1,0 +1,3 @@
+com\persistence\config\WebInitializer.class
+com\persistence\config\PersistenceJPAConfig.class
+com\persistence\config\SpringWebConfig.class
