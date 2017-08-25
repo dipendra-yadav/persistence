@@ -20,8 +20,11 @@ import com.google.common.base.Preconditions;
 
 @Configuration
 @PropertySource({ "classpath:persistence-multiple-db.properties" })
-@EnableJpaRepositories(basePackages = "org.baeldung.persistence.multiple.dao.product", entityManagerFactoryRef = "productEntityManager", transactionManagerRef = "productTransactionManager")
+@EnableJpaRepositories(basePackages = "com.persistence.multiple.dao.product", 
+entityManagerFactoryRef = "productEntityManager", 
+transactionManagerRef = "productTransactionManager")
 public class ProductConfig {
+
 	@Autowired
 	private Environment env;
 
@@ -32,10 +35,21 @@ public class ProductConfig {
 	//
 
 	@Bean
+	public DataSource productDataSource() {
+		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName(Preconditions.checkNotNull(env.getProperty("jdbc.driverClassName")));
+		dataSource.setUrl(Preconditions.checkNotNull(env.getProperty("product.jdbc.url")));
+		dataSource.setUsername(Preconditions.checkNotNull(env.getProperty("jdbc.user")));
+		dataSource.setPassword(Preconditions.checkNotNull(env.getProperty("jdbc.pass")));
+
+		return dataSource;
+	}
+
+	@Bean
 	public LocalContainerEntityManagerFactoryBean productEntityManager() {
 		final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(productDataSource());
-		em.setPackagesToScan(new String[] { "org.baeldung.persistence.multiple.model.product" });
+		em.setPackagesToScan(new String[] { "com.persistence.multiple.model.product" });
 
 		final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
@@ -45,17 +59,6 @@ public class ProductConfig {
 		em.setJpaPropertyMap(properties);
 
 		return em;
-	}
-
-	@Bean
-	public DataSource productDataSource() {
-		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName(Preconditions.checkNotNull(env.getProperty("jdbc.driverClassName")));
-		dataSource.setUrl(Preconditions.checkNotNull(env.getProperty("product.jdbc.url")));
-		dataSource.setUsername(Preconditions.checkNotNull(env.getProperty("jdbc.user")));
-		dataSource.setPassword(Preconditions.checkNotNull(env.getProperty("jdbc.pass")));
-
-		return dataSource;
 	}
 
 	@Bean

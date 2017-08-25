@@ -26,7 +26,7 @@ import com.google.common.base.Preconditions;
 @EnableTransactionManagement
 @PropertySource({ "classpath:persistence-mysql.properties" })
 @ComponentScan({ "com.persistence" })
-@EnableJpaRepositories(basePackages = "")
+@EnableJpaRepositories(basePackages = "com.persistence.dao")
 public class PersistenceJPAConfig {
 
 	@Autowired
@@ -47,7 +47,7 @@ public class PersistenceJPAConfig {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(dataSource());
-		em.setPackagesToScan(new String[] { "" });
+		em.setPackagesToScan(new String[] { "com.persistence.*" });
 
 		final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);

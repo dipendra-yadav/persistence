@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableJpaRepositories(basePackages = "org.baeldung.persistence.dao")
-@PropertySource("persistence-student.properties")
+@PropertySource("classpath:persistence-student.properties")
 @EnableTransactionManagement
 public class StudentJpaConfig {
 
@@ -41,14 +41,14 @@ public class StudentJpaConfig {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(dataSource());
-		em.setPackagesToScan(new String[] { "org.baeldung.persistence.model" });
+		em.setPackagesToScan(new String[] { "com.persistence.model" });
 		em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		em.setJpaProperties(additionalProperties());
 		return em;
 	}
 
 	@Bean
-	JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+	public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(entityManagerFactory);
 		return transactionManager;

@@ -24,8 +24,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @PropertySource({ "classpath:persistence-jndi.properties" })
-@ComponentScan({ "org.baeldung.persistence" })
-@EnableJpaRepositories(basePackages = "org.baeldung.persistence.dao")
+@ComponentScan({ "com.persistence" })
+@EnableJpaRepositories(basePackages = "com.persistence.dao")
 public class PersistenceJNDIConfig {
 
 	@Autowired
@@ -36,18 +36,18 @@ public class PersistenceJNDIConfig {
 	}
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws NamingException {
-		final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-		em.setDataSource(dataSource());
-		em.setPackagesToScan(new String[] { "org.baeldung.persistence.model" });
-		em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-		em.setJpaProperties(additionalProperties());
-		return em;
+	public DataSource dataSource() throws NamingException {
+		return (DataSource) new JndiTemplate().lookup(env.getProperty("jdbc.url"));
 	}
 
 	@Bean
-	public DataSource dataSource() throws NamingException {
-		return (DataSource) new JndiTemplate().lookup(env.getProperty("jdbc.url"));
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws NamingException {
+		final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+		em.setDataSource(dataSource());
+		em.setPackagesToScan(new String[] { "com.persistence.model" });
+		em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+		em.setJpaProperties(additionalProperties());
+		return em;
 	}
 
 	@Bean

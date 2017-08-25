@@ -21,8 +21,11 @@ import com.google.common.base.Preconditions;
 
 @Configuration
 @PropertySource({ "classpath:persistence-multiple-db.properties" })
-@EnableJpaRepositories(basePackages = "org.baeldung.persistence.multiple.dao.user", entityManagerFactoryRef = "userEntityManager", transactionManagerRef = "userTransactionManager")
+@EnableJpaRepositories(basePackages = "com.persistence.multiple.dao.user", 
+entityManagerFactoryRef = "userEntityManager", 
+transactionManagerRef = "userTransactionManager")
 public class UserConfig {
+	
 	@Autowired
 	private Environment env;
 
@@ -31,24 +34,8 @@ public class UserConfig {
 	}
 
 	//
-
-	@Primary
-	@Bean
-	public LocalContainerEntityManagerFactoryBean userEntityManager() {
-		final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-		em.setDataSource(userDataSource());
-		em.setPackagesToScan(new String[] { "org.baeldung.persistence.multiple.model.user" });
-
-		final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		em.setJpaVendorAdapter(vendorAdapter);
-		final HashMap<String, Object> properties = new HashMap<String, Object>();
-		properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-		properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
-		em.setJpaPropertyMap(properties);
-
-		return em;
-	}
-
+	
+	
 	@Primary
 	@Bean
 	public DataSource userDataSource() {
@@ -60,6 +47,25 @@ public class UserConfig {
 
 		return dataSource;
 	}
+
+
+	@Primary
+	@Bean
+	public LocalContainerEntityManagerFactoryBean userEntityManager() {
+		final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+		em.setDataSource(userDataSource());
+		em.setPackagesToScan(new String[] { "com.persistence.multiple.model.user" });
+
+		final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		em.setJpaVendorAdapter(vendorAdapter);
+		final HashMap<String, Object> properties = new HashMap<String, Object>();
+		properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+		properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+		em.setJpaPropertyMap(properties);
+
+		return em;
+	}
+
 
 	@Primary
 	@Bean
