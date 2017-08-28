@@ -1,2 +1,2 @@
-<ResourceLink name="jdbc/BaeldungDatabase" global="jdbc/BaeldungDatabase"
+<ResourceLink name="jdbc/JpaDatabase" global="jdbc/JpaDatabase"
 	type="javax.sql.DataSource" />

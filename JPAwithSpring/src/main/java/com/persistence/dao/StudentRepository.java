@@ -1,4 +1,4 @@
-package com.persistence.dao;
+/*package com.persistence.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -9,3 +9,4 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 	
 	
 }
+*/

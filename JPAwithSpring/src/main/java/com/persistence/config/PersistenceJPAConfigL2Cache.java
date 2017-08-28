@@ -1,4 +1,4 @@
-package com.persistence.config;
+/*package com.persistence.config;
 
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource({ "classpath:persistence-h2.properties" })
+@PropertySource({ "classpath:persistence-mysql.properties" })
 @ComponentScan({ "com.persistence" })
 @EnableJpaRepositories(basePackages = "com.persistence.dao")
 public class PersistenceJPAConfigL2Cache {
@@ -37,23 +37,6 @@ public class PersistenceJPAConfigL2Cache {
 	// beans
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-		final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-		em.setDataSource(dataSource());
-		em.setPackagesToScan(getPackagesToScan());
-
-		final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		em.setJpaVendorAdapter(vendorAdapter);
-		em.setJpaProperties(additionalProperties());
-
-		return em;
-	}
-
-	protected String[] getPackagesToScan() {
-		return new String[] { "org.baeldung.persistence.model" };
-	}
-
-	@Bean
 	public DataSource dataSource() {
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(Preconditions.checkNotNull(env.getProperty("jdbc.driverClassName")));
@@ -61,6 +44,19 @@ public class PersistenceJPAConfigL2Cache {
 		dataSource.setUsername(Preconditions.checkNotNull(env.getProperty("jdbc.user")));
 
 		return dataSource;
+	}
+
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+		final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+		em.setDataSource(dataSource());
+		em.setPackagesToScan(new String[] { "com.persistence.*" });
+
+		final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		em.setJpaVendorAdapter(vendorAdapter);
+		em.setJpaProperties(additionalProperties());
+
+		return em;
 	}
 
 	@Bean
@@ -88,4 +84,4 @@ public class PersistenceJPAConfigL2Cache {
 		hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
 		return hibernateProperties;
 	}
-}
+}*/

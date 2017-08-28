@@ -1,4 +1,4 @@
-package com.persistence.config;
+/*package com.persistence.config;
 
 import java.util.HashMap;
 
@@ -68,4 +68,4 @@ public class ProductConfig {
 		return transactionManager;
 	}
 
-}
+}*/

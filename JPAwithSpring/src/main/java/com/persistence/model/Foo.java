@@ -26,6 +26,7 @@ public class Foo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private long id;
+	
 	@Column(name = "NAME")
 	private String name;
 
@@ -33,6 +34,7 @@ public class Foo implements Serializable {
 	@JoinColumn(name = "BAR_ID")
 	private Bar bar;
 
+	//accessors n mutators
 	public Bar getBar() {
 		return bar;
 	}

@@ -6,6 +6,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class AbstractJpaDAO<T extends Serializable> {
 
 	private Class<T> clazz;
@@ -23,6 +26,7 @@ public class AbstractJpaDAO<T extends Serializable> {
 
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
+		System.out.println("AbstractJpaDAO findAll called**********");
 		return entityManager.createQuery("from " + clazz.getName()).getResultList();
 	}
 

@@ -1,4 +1,4 @@
-package com.persistence.config;
+/*package com.persistence.config;
 
 import java.util.Properties;
 
@@ -81,4 +81,4 @@ public class PersistenceJPAConfig {
 		return hibernateProperties;
 	}
 
-}
+}*/

@@ -1,4 +1,4 @@
-package com.persistence.config;
+/*package com.persistence.config;
 
 import java.util.Properties;
 
@@ -67,4 +67,4 @@ public class StudentJpaConfig {
 
 		return hibernateProperties;
 	}
-}
+}*/
