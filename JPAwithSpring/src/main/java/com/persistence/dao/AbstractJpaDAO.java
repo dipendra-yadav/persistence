@@ -8,11 +8,14 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Component;
 
+
+//Spring factory bean
 @Component
 public class AbstractJpaDAO<T extends Serializable> {
 
 	private Class<T> clazz;
 
+	//is used to wire the EntityManager into the Spring factory bean
 	@PersistenceContext
 	private EntityManager entityManager;
 
