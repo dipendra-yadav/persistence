@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -64,10 +65,16 @@ public class PersistenceJNDIConfig {
 		return transactionManager;
 	}
 
+	//Platform -specific exception are turned into  spring's unchecked Data excess Exception
 	@Bean
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
+	
+	/*public BeanPostProcessor exceptionTranslation() {
+		return new PersistenceExceptionTranslationPostProcessor();
+	}*/
+
 
 	final Properties additionalProperties() {
 		final Properties hibernateProperties = new Properties();
