@@ -9,9 +9,9 @@
 
 	<context:property-placeholder location="classpath:persistence-mysql.properties" />
 
-   
 
-    <!-- dataSouce -->
+
+	<!-- dataSouce -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
@@ -21,7 +21,7 @@
 	</bean>
 
 
-    <!-- entityManagerFactory-->
+	<!-- entityManagerFactory -->
 	<bean id="myEmf"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -43,10 +43,13 @@
 		</property>
 	</bean>
 
-    <!-- TransactionManager -->
+	<!-- TransactionManager -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="myEmf" />
 	</bean>
+	<!-- Configure Transactions with XML -->
+	<!-- Before 3.1 or if Java is not an option, here is the XML configuration, 
+		using annotation-driven and the namespace support: -->
 	<tx:annotation-driven />
 
 	<bean id="persistenceExceptionTranslationPostProcessor"
