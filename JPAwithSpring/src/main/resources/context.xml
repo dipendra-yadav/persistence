@@ -1,2 +1,2 @@
-<ResourceLink name="jdbc/JpaDatabase" global="jdbc/JpaDatabase"
+<ResourceLink name="jdbc/JndiDatabase" global="jdbc/JndiDatabase"
 	type="javax.sql.DataSource" />

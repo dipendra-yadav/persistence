@@ -1,0 +1,31 @@
+1)To use JPA in a Spring project, the EntityManager needs to be set up.
+  This is the main part of the configuration – and it is done via a Spring factory bean – 
+  either the simpler LocalEntityManagerFactoryBean or the more flexible LocalContainerEntityManagerFactoryBean. 
+
+2)Also, note that, before Spring 3.2, cglib had to be on the classpath for Java @Configuration classes to work.
+
+3)There is a relatively small difference between the way Spring is configured in XML and the new Java based configuration –
+  in XML, a reference to another bean can point to either the bean or a bean factory for that bean. In Java however, 
+  since the types are different, the compiler doesn’t allow it, and so the EntityManagerFactory is first retrieved from it’s bean factory and then passed to the transaction manager:
+  txManager.setEntityManagerFactory( this.entityManagerFactoryBean().getObject() );
+
+4)Going full XML-less
+  Usually JPA defines a persistence unit through the META-INF/persistence.xml file. 
+  Starting with Spring 3.1, the persistence.xml is no longer necessary – the LocalContainerEntityManagerFactoryBean now supports a 
+ ‘packagesToScan’ property where the packages to scan for @Entity classes can be specified.
+  This file was the last piece of XML to be removed – now, JPA can be fully set up with no XML.
+  
+5)The JPA Properties
+  JPA properties would usually be specified in the persistence.xml file; alternatively, the properties can be specified 
+  directly to the entity manager factory bean:
+  factoryBean.setJpaProperties( this.additionalProperties() );
+  As a side-note, if Hibernate would be the persistence provider, 
+  then this would be the way to specify Hibernate specific properties.
+  
+6)Conclusion
+  This tutorial illustrated how to configure JPA with Hibernate in Spring using both XML and Java configuration.
+  We also discussed how to get rid of the last piece of XML usually associated with JPA – the persistence.xml. 
+  The final result is a lightweight, clean DAO implementation, with almost no compile-time reliance on Spring.
+  
+  
+

@@ -1,4 +1,4 @@
-<Resource name="jdbc/JpaDatabase" auth="Container"
+<Resource name="jdbc/JndiDatabase" auth="Container"
 	type="javax.sql.DataSource" driverClassName="com.mysql.jdbc.Driver"
-	url="jdbc:mysql://localhost:3306/spring_jpa" username="root"
+	url="jdbc:mysql://localhost:3306/JndiDatabase" username="root"
 	password="" maxActive="20" maxIdle="10" maxWait="-1" />

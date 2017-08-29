@@ -14,4 +14,4 @@ com\persistence\config\WebInitializer.class
 com\persistence\config\SpringWebConfig.class
 com\persistence\dao\FooDao.class
 com\persistence\multiple\dao\user\PossessionRepository.class
-com\persistence\config\PersistenceJPAConfig.class
+com\persistence\config\PersistenceJNDIConfig.class
