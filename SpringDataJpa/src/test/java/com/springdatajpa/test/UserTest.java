@@ -6,10 +6,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
 
+import com.springdatajpa.config.PersistenceConfig;
+import com.springdatajpa.config.SpringWebConfig;
 import com.springdatajpa.dao.UserRepository;
 import com.springdatajpa.model.User;
 
+//@WebAppConfiguration
+@ContextConfiguration(classes = { SpringWebConfig.class, PersistenceConfig.class })
 public class UserTest {
 
 	// artifacts
