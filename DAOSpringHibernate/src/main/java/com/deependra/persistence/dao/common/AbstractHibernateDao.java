@@ -56,3 +56,15 @@ public class AbstractHibernateDao<T extends Serializable> extends AbstractDao<T>
 	}
 
 }
+
+
+//1 we have written a base DAO – an abstract, parametrized DAO which supports the common generic operations 
+//  and is meant to be extended for each entity:
+
+//2 the abstract DAO does not extend any Spring template (such as HibernateTemplate). 
+//  Instead, the Hibernate SessionFactory is injected directly in the DAO.
+
+//3 to get Hibernate session(contextual Session) from sessionFactory,this.sessionFactory.getCurrentSession();
+//4 we are using some Third Party classes -Guava
+
+
