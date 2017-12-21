@@ -19,3 +19,11 @@ public class BarDao extends AbstractJpaDao<Bar> implements IBarDao {
 	// API
 
 }
+
+
+//1 implement the DAO with Spring and JPA. 
+//2 No More Spring Templates:
+//    the JpaTemplate and the corresponding JpaDaoSupport have been deprecated in favor of using the native Java Persistence API.
+//    Also, both of these classes are only relevant for JPA 1
+//    As a consequence, it is now best practice to use the Java Persistence API directly instead of the JpaTemplate.
+//

@@ -10,6 +10,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+//base layer for all the DAOs – an abstract class using generics and designed to be extended
+
+
 public class AbstractJpaDao<T extends Serializable> extends AbstractDao<T> implements IOperations<T> {
 
 	@PersistenceContext

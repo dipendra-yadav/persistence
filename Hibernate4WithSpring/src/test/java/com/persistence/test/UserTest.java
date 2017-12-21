@@ -28,7 +28,7 @@ public class UserTest  {
 		context.scan("com.persistence");
 		context.refresh();
 
-		// fecth Beans
+		// fetch Beans
 		user = context.getBean(User.class);
 		System.out.println("user=" + user);
 
